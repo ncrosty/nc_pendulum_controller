@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.143
+// Model version                  : 1.144
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:10:59 2018
+// C/C++ source code generated on : Thu Apr 12 17:20:56 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -54,7 +54,6 @@ typedef struct {
   real_T Filter;                       // '<S7>/Filter'
   real_T SumD;                         // '<S7>/SumD'
   real_T FilterCoefficient;            // '<S7>/Filter Coefficient'
-  real_T Sum;                          // '<S7>/Sum'
   real_T IntegralGain;                 // '<S7>/Integral Gain'
   real_T CoordinateTransformationConvers[3];// '<S5>/Coordinate Transformation Conversion' 
   real_T qw;

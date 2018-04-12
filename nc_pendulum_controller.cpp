@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.143
+// Model version                  : 1.144
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:10:59 2018
+// C/C++ source code generated on : Thu Apr 12 17:20:56 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -321,8 +321,8 @@ void nc_pendulum_controller_cModelClass::step()
     nc_pendulum_controller_B.CoordinateTransformationConvers[1];
   if (nc_pendulum_controller_B.aSinInput > 2.0) {
     nc_pendulum_controller_B.Saturation = 2.0;
-  } else if (nc_pendulum_controller_B.aSinInput < 2.0) {
-    nc_pendulum_controller_B.Saturation = 2.0;
+  } else if (nc_pendulum_controller_B.aSinInput < -2.0) {
+    nc_pendulum_controller_B.Saturation = -2.0;
   } else {
     nc_pendulum_controller_B.Saturation = nc_pendulum_controller_B.aSinInput;
   }
@@ -330,7 +330,7 @@ void nc_pendulum_controller_cModelClass::step()
   // End of Saturate: '<Root>/Saturation'
 
   // Gain: '<S7>/Proportional Gain'
-  nc_pendulum_controller_B.ProportionalGain = 520.260659122808 *
+  nc_pendulum_controller_B.ProportionalGain = 391.076972292828 *
     nc_pendulum_controller_B.Saturation;
 
   // DiscreteIntegrator: '<S7>/Integrator'
@@ -338,7 +338,7 @@ void nc_pendulum_controller_cModelClass::step()
     nc_pendulum_controller_DW.Integrator_DSTATE;
 
   // Gain: '<S7>/Derivative Gain'
-  nc_pendulum_controller_B.DerivativeGain = 71.5316240846164 *
+  nc_pendulum_controller_B.DerivativeGain = 81.3758738793687 *
     nc_pendulum_controller_B.Saturation;
 
   // DiscreteIntegrator: '<S7>/Filter'
@@ -349,28 +349,15 @@ void nc_pendulum_controller_cModelClass::step()
     nc_pendulum_controller_B.Filter;
 
   // Gain: '<S7>/Filter Coefficient'
-  nc_pendulum_controller_B.FilterCoefficient = 10.4072791048381 *
+  nc_pendulum_controller_B.FilterCoefficient = 9.96137012167381 *
     nc_pendulum_controller_B.SumD;
 
-  // Sum: '<S7>/Sum'
-  nc_pendulum_controller_B.Sum = (nc_pendulum_controller_B.ProportionalGain +
+  // Outport: '<Root>/Out1' incorporates:
+  //   Sum: '<S7>/Sum'
+
+  nc_pendulum_controller_Y.Out1 = (nc_pendulum_controller_B.ProportionalGain +
     nc_pendulum_controller_B.Integrator) +
     nc_pendulum_controller_B.FilterCoefficient;
-
-  // Saturate: '<Root>/Saturation1'
-  nc_pendulum_controller_B.aSinInput = nc_pendulum_controller_B.Sum;
-  if (nc_pendulum_controller_B.aSinInput > 2.0) {
-    // Outport: '<Root>/Out1'
-    nc_pendulum_controller_Y.Out1 = 2.0;
-  } else if (nc_pendulum_controller_B.aSinInput < 2.0) {
-    // Outport: '<Root>/Out1'
-    nc_pendulum_controller_Y.Out1 = 2.0;
-  } else {
-    // Outport: '<Root>/Out1'
-    nc_pendulum_controller_Y.Out1 = nc_pendulum_controller_B.aSinInput;
-  }
-
-  // End of Saturate: '<Root>/Saturation1'
 
   // BusAssignment: '<Root>/Bus Assignment1' incorporates:
   //   Constant: '<S1>/Constant'
@@ -430,7 +417,7 @@ void nc_pendulum_controller_cModelClass::step()
   // End of Outputs for SubSystem: '<Root>/Publish2'
 
   // Gain: '<S7>/Integral Gain'
-  nc_pendulum_controller_B.IntegralGain = 238.793719448055 *
+  nc_pendulum_controller_B.IntegralGain = 299.50456300417 *
     nc_pendulum_controller_B.Saturation;
 
   // Update for DiscreteIntegrator: '<S7>/Integrator'
