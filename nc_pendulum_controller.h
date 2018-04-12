@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.66
+// Model version                  : 1.80
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 08:14:50 2018
+// C/C++ source code generated on : Thu Apr 12 10:43:23 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -47,8 +47,15 @@ typedef struct {
   real_T b_z1[4];
   char_T zeroDelimTopic[28];
   char_T zeroDelimTopic_m[27];
-  real_T Gain;                         // '<Root>/Gain'
+  real_T ProportionalGain;             // '<S5>/Proportional Gain'
+  real_T Integrator;                   // '<S5>/Integrator'
+  real_T DerivativeGain;               // '<S5>/Derivative Gain'
+  real_T Filter;                       // '<S5>/Filter'
+  real_T SumD;                         // '<S5>/SumD'
+  real_T FilterCoefficient;            // '<S5>/Filter Coefficient'
   real_T Gain1;                        // '<Root>/Gain1'
+  real_T Gain2;                        // '<Root>/Gain2'
+  real_T IntegralGain;                 // '<S5>/Integral Gain'
   real_T CoordinateTransformationConvers[3];// '<Root>/Coordinate Transformation Conversion' 
   real_T qw;
   real_T qx;
@@ -78,6 +85,8 @@ typedef struct {
   robotics_slros_internal_block_T obj_l;// '<S7>/SinkBlock'
   robotics_slros_internal_block_T obj_e;// '<S6>/SinkBlock'
   robotics_slros_internal_blo_o_T obj_em;// '<S9>/SourceBlock'
+  real_T Integrator_DSTATE;            // '<S5>/Integrator'
+  real_T Filter_DSTATE;                // '<S5>/Filter'
   robotics_slcore_internal_bloc_T obj_b;// '<Root>/Coordinate Transformation Conversion' 
   boolean_T objisempty;                // '<S9>/SourceBlock'
   boolean_T objisempty_a;              // '<S8>/SinkBlock'
@@ -85,6 +94,16 @@ typedef struct {
   boolean_T objisempty_as;             // '<S6>/SinkBlock'
   boolean_T objisempty_l;              // '<Root>/Coordinate Transformation Conversion' 
 } DW_nc_pendulum_controller_T;
+
+// External inputs (root inport signals with default storage)
+typedef struct {
+  real_T In1;                          // '<Root>/In1'
+} ExtU_nc_pendulum_controller_T;
+
+// External outputs (root outports fed by signals with default storage)
+typedef struct {
+  real_T Out1;                         // '<Root>/Out1'
+} ExtY_nc_pendulum_controller_T;
 
 // Real-time Model Data Structure
 struct tag_RTM_nc_pendulum_controlle_T {
@@ -99,6 +118,12 @@ extern const SL_Bus_nc_pendulum_controller_std_msgs_Float64
 class nc_pendulum_controller_cModelClass {
   // public data and function members
  public:
+  // External inputs
+  ExtU_nc_pendulum_controller_T nc_pendulum_controller_U;
+
+  // External outputs
+  ExtY_nc_pendulum_controller_T nc_pendulum_controller_Y;
+
   // model initialize function
   void initialize();
 
@@ -140,14 +165,8 @@ class nc_pendulum_controller_cModelClass {
 //-
 //  These blocks were eliminated from the model due to optimizations:
 //
-//  Block '<S5>/Derivative Gain' : Unused code path elimination
-//  Block '<S5>/Filter' : Unused code path elimination
-//  Block '<S5>/Filter Coefficient' : Unused code path elimination
-//  Block '<S5>/Integral Gain' : Unused code path elimination
-//  Block '<S5>/Integrator' : Unused code path elimination
-//  Block '<S5>/Proportional Gain' : Unused code path elimination
-//  Block '<S5>/Sum' : Unused code path elimination
-//  Block '<S5>/SumD' : Unused code path elimination
+//  Block '<Root>/Switch' : Eliminated due to constant selection input
+//  Block '<Root>/Constant1' : Unused code path elimination
 
 
 //-

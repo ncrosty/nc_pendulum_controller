@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.66
+// Model version                  : 1.80
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 08:14:50 2018
+// C/C++ source code generated on : Thu Apr 12 10:43:23 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -306,12 +306,40 @@ void nc_pendulum_controller_cModelClass::step()
   nc_pendulum_controller_B.CoordinateTransformationConvers[2] =
     nc_pendulum_controller_B.qw;
 
-  // Gain: '<Root>/Gain'
-  nc_pendulum_controller_B.Gain = -50.0 *
+  // Gain: '<S5>/Proportional Gain'
+  nc_pendulum_controller_B.ProportionalGain = 211.847958087421 *
     nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
-  // Gain: '<Root>/Gain1'
-  nc_pendulum_controller_B.Gain1 = 0.625 * nc_pendulum_controller_B.Gain;
+  // DiscreteIntegrator: '<S5>/Integrator'
+  nc_pendulum_controller_B.Integrator =
+    nc_pendulum_controller_DW.Integrator_DSTATE;
+
+  // Gain: '<S5>/Derivative Gain'
+  nc_pendulum_controller_B.DerivativeGain = 77.174516077139 *
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
+
+  // DiscreteIntegrator: '<S5>/Filter'
+  nc_pendulum_controller_B.Filter = nc_pendulum_controller_DW.Filter_DSTATE;
+
+  // Sum: '<S5>/SumD'
+  nc_pendulum_controller_B.SumD = nc_pendulum_controller_B.DerivativeGain -
+    nc_pendulum_controller_B.Filter;
+
+  // Gain: '<S5>/Filter Coefficient'
+  nc_pendulum_controller_B.FilterCoefficient = 38.578437407581 *
+    nc_pendulum_controller_B.SumD;
+
+  // Outport: '<Root>/Out1' incorporates:
+  //   Sum: '<S5>/Sum'
+
+  nc_pendulum_controller_Y.Out1 = (nc_pendulum_controller_B.ProportionalGain +
+    nc_pendulum_controller_B.Integrator) +
+    nc_pendulum_controller_B.FilterCoefficient;
+
+  // Gain: '<Root>/Gain1' incorporates:
+  //   Outport: '<Root>/Out1'
+
+  nc_pendulum_controller_B.Gain1 = -nc_pendulum_controller_Y.Out1;
 
   // BusAssignment: '<Root>/Bus Assignment1' incorporates:
   //   Constant: '<S1>/Constant'
@@ -331,12 +359,17 @@ void nc_pendulum_controller_cModelClass::step()
 
   // End of Outputs for SubSystem: '<Root>/Publish'
 
+  // Gain: '<Root>/Gain2' incorporates:
+  //   Outport: '<Root>/Out1'
+
+  nc_pendulum_controller_B.Gain2 = -nc_pendulum_controller_Y.Out1;
+
   // BusAssignment: '<Root>/Bus Assignment2' incorporates:
   //   Constant: '<S2>/Constant'
 
   nc_pendulum_controller_B.BusAssignment2 =
     nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
-  nc_pendulum_controller_B.BusAssignment2.Data = nc_pendulum_controller_B.Gain1;
+  nc_pendulum_controller_B.BusAssignment2.Data = nc_pendulum_controller_B.Gain2;
 
   // Outputs for Atomic SubSystem: '<Root>/Publish1'
   // MATLABSystem: '<S7>/SinkBlock'
@@ -367,6 +400,18 @@ void nc_pendulum_controller_cModelClass::step()
   Pub_nc_pendulum_controller_69.publish(&nc_pendulum_controller_B.busstruct_c);
 
   // End of Outputs for SubSystem: '<Root>/Publish2'
+
+  // Gain: '<S5>/Integral Gain'
+  nc_pendulum_controller_B.IntegralGain = 128.883991253346 *
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
+
+  // Update for DiscreteIntegrator: '<S5>/Integrator'
+  nc_pendulum_controller_DW.Integrator_DSTATE += 0.05 *
+    nc_pendulum_controller_B.IntegralGain;
+
+  // Update for DiscreteIntegrator: '<S5>/Filter'
+  nc_pendulum_controller_DW.Filter_DSTATE += 0.05 *
+    nc_pendulum_controller_B.FilterCoefficient;
 }
 
 // Model initialize function
@@ -387,6 +432,12 @@ void nc_pendulum_controller_cModelClass::initialize()
   // states (dwork)
   (void) memset((void *)&nc_pendulum_controller_DW, 0,
                 sizeof(DW_nc_pendulum_controller_T));
+
+  // external inputs
+  nc_pendulum_controller_U.In1 = 0.0;
+
+  // external outputs
+  nc_pendulum_controller_Y.Out1 = 0.0;
 
   {
     robotics_slcore_internal_bloc_T *b_obj;
