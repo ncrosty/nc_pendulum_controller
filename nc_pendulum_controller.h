@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.28
+// Model version                  : 1.65
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Wed Apr 11 16:40:29 2018
+// C/C++ source code generated on : Thu Apr 12 08:08:32 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -39,54 +39,51 @@
 
 // Block signals (default storage)
 typedef struct {
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates In1;// '<S12>/In1'
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates SourceBlock_o2;// '<S7>/SourceBlock' 
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates In1;// '<S10>/In1'
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates SourceBlock_o2;// '<S9>/SourceBlock' 
   SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates b_varargout_2;
+  real_T VectorConcatenate[4];         // '<Root>/Vector Concatenate'
+  real_T in[4];
+  real_T b_z1[4];
   char_T zeroDelimTopic[28];
   char_T zeroDelimTopic_m[27];
-  real_T Product;                      // '<S11>/Product'
-  real_T Product1;                     // '<S11>/Product1'
-  real_T Product2;                     // '<S11>/Product2'
-  real_T Product3;                     // '<S11>/Product3'
-  real_T Sum;                          // '<S11>/Sum'
-  real_T sqrt_h;                       // '<S10>/sqrt'
-  real_T Product_b;                    // '<S9>/Product'
-  real_T Product1_l;                   // '<S9>/Product1'
-  real_T Product2_b;                   // '<S9>/Product2'
-  real_T Product3_k;                   // '<S9>/Product3'
-  real_T fcn1;                         // '<S6>/fcn1'
-  real_T fcn2;                         // '<S6>/fcn2'
-  real_T fcn3;                         // '<S6>/fcn3'
-  real_T fcn4;                         // '<S6>/fcn4'
-  real_T fcn5;                         // '<S6>/fcn5'
-  real_T VectorConcatenate[3];         // '<S8>/Vector Concatenate'
-  real_T ProportionalGain;             // '<S3>/Proportional Gain'
-  real_T Integrator;                   // '<S3>/Integrator'
-  real_T DerivativeGain;               // '<S3>/Derivative Gain'
-  real_T Filter;                       // '<S3>/Filter'
-  real_T SumD;                         // '<S3>/SumD'
-  real_T FilterCoefficient;            // '<S3>/Filter Coefficient'
-  real_T Sum_f;                        // '<S3>/Sum'
   real_T Gain;                         // '<Root>/Gain'
-  real_T IntegralGain;                 // '<S3>/Integral Gain'
-  real_T u0;
+  real_T Gain1;                        // '<Root>/Gain1'
+  real_T CoordinateTransformationConvers[3];// '<Root>/Coordinate Transformation Conversion' 
+  real_T qw;
+  real_T qx;
+  real_T qy;
+  real_T qz;
+  real_T aSinInput;
+  real_T b;
+  real_T c;
+  real_T y;
+  real_T y_c;
+  real_T y_k;
+  real_T y_cx;
+  real_T y_b;
+  real_T out_idx_0;
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment1;// '<Root>/Bus Assignment1' 
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment2;// '<Root>/Bus Assignment2' 
+  SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment3;// '<Root>/Bus Assignment3' 
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct;
+  SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct_p;
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct_c;
-  boolean_T SourceBlock_o1;            // '<S7>/SourceBlock'
+  boolean_T SourceBlock_o1;            // '<S9>/SourceBlock'
 } B_nc_pendulum_controller_T;
 
 // Block states (default storage) for system '<Root>'
 typedef struct {
-  robotics_slros_internal_block_T obj; // '<S5>/SinkBlock'
-  robotics_slros_internal_block_T obj_e;// '<S4>/SinkBlock'
-  robotics_slros_internal_blo_o_T obj_em;// '<S7>/SourceBlock'
-  real_T Integrator_DSTATE;            // '<S3>/Integrator'
-  real_T Filter_DSTATE;                // '<S3>/Filter'
-  boolean_T objisempty;                // '<S7>/SourceBlock'
-  boolean_T objisempty_d;              // '<S5>/SinkBlock'
-  boolean_T objisempty_a;              // '<S4>/SinkBlock'
+  robotics_slros_internal_block_T obj; // '<S8>/SinkBlock'
+  robotics_slros_internal_block_T obj_l;// '<S7>/SinkBlock'
+  robotics_slros_internal_block_T obj_e;// '<S6>/SinkBlock'
+  robotics_slros_internal_blo_o_T obj_em;// '<S9>/SourceBlock'
+  robotics_slcore_internal_bloc_T obj_b;// '<Root>/Coordinate Transformation Conversion' 
+  boolean_T objisempty;                // '<S9>/SourceBlock'
+  boolean_T objisempty_a;              // '<S8>/SinkBlock'
+  boolean_T objisempty_d;              // '<S7>/SinkBlock'
+  boolean_T objisempty_as;             // '<S6>/SinkBlock'
+  boolean_T objisempty_l;              // '<Root>/Coordinate Transformation Conversion' 
 } DW_nc_pendulum_controller_T;
 
 // Real-time Model Data Structure
@@ -132,13 +129,26 @@ class nc_pendulum_controller_cModelClass {
   RT_MODEL_nc_pendulum_controll_T nc_pendulum_controller_M;
 
   // private member function(s) for subsystem '<Root>'
-  void SystemProp_matlabCodegenSetA_oe(robotics_slros_internal_blo_o_T *obj,
+  void SystemProp_matlabCodegenSet_oen(robotics_slros_internal_blo_o_T *obj,
     boolean_T value);
-  void matlabCodegenHandle_matlabCo_oe(robotics_slros_internal_blo_o_T *obj);
+  void matlabCodegenHandle_matlabC_oen(robotics_slros_internal_blo_o_T *obj);
   void SystemProp_matlabCodegenSetAnyP(robotics_slros_internal_block_T *obj,
     boolean_T value);
   void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj);
 };
+
+//-
+//  These blocks were eliminated from the model due to optimizations:
+//
+//  Block '<S5>/Derivative Gain' : Unused code path elimination
+//  Block '<S5>/Filter' : Unused code path elimination
+//  Block '<S5>/Filter Coefficient' : Unused code path elimination
+//  Block '<S5>/Integral Gain' : Unused code path elimination
+//  Block '<S5>/Integrator' : Unused code path elimination
+//  Block '<S5>/Proportional Gain' : Unused code path elimination
+//  Block '<S5>/Sum' : Unused code path elimination
+//  Block '<S5>/SumD' : Unused code path elimination
+
 
 //-
 //  The generated code includes comments that allow you to trace directly
@@ -157,16 +167,14 @@ class nc_pendulum_controller_cModelClass {
 //  '<Root>' : 'nc_pendulum_controller'
 //  '<S1>'   : 'nc_pendulum_controller/Blank Message1'
 //  '<S2>'   : 'nc_pendulum_controller/Blank Message2'
-//  '<S3>'   : 'nc_pendulum_controller/PID Controller'
-//  '<S4>'   : 'nc_pendulum_controller/Publish'
-//  '<S5>'   : 'nc_pendulum_controller/Publish1'
-//  '<S6>'   : 'nc_pendulum_controller/Quaternions to Rotation Angles'
-//  '<S7>'   : 'nc_pendulum_controller/Subscribe'
-//  '<S8>'   : 'nc_pendulum_controller/Quaternions to Rotation Angles/Angle Calculation'
-//  '<S9>'   : 'nc_pendulum_controller/Quaternions to Rotation Angles/Quaternion Normalize'
-//  '<S10>'  : 'nc_pendulum_controller/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus'
-//  '<S11>'  : 'nc_pendulum_controller/Quaternions to Rotation Angles/Quaternion Normalize/Quaternion Modulus/Quaternion Norm'
-//  '<S12>'  : 'nc_pendulum_controller/Subscribe/Enabled Subsystem'
+//  '<S3>'   : 'nc_pendulum_controller/Blank Message3'
+//  '<S4>'   : 'nc_pendulum_controller/MATLAB Function'
+//  '<S5>'   : 'nc_pendulum_controller/PID Controller1'
+//  '<S6>'   : 'nc_pendulum_controller/Publish'
+//  '<S7>'   : 'nc_pendulum_controller/Publish1'
+//  '<S8>'   : 'nc_pendulum_controller/Publish2'
+//  '<S9>'   : 'nc_pendulum_controller/Subscribe'
+//  '<S10>'  : 'nc_pendulum_controller/Subscribe/Enabled Subsystem'
 
 #endif                                 // RTW_HEADER_nc_pendulum_controller_h_
 

@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.28
+// Model version                  : 1.65
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Wed Apr 11 16:40:29 2018
+// C/C++ source code generated on : Thu Apr 12 08:08:32 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -139,6 +139,15 @@ typedef struct {
 } SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates;
 
 #endif
+
+#ifndef typedef_robotics_slcore_internal_bloc_T
+#define typedef_robotics_slcore_internal_bloc_T
+
+typedef struct {
+  int32_T isInitialized;
+} robotics_slcore_internal_bloc_T;
+
+#endif                                 //typedef_robotics_slcore_internal_bloc_T
 
 #ifndef typedef_robotics_slros_internal_block_T
 #define typedef_robotics_slros_internal_block_T

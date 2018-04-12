@@ -16,6 +16,9 @@ extern SimulinkPublisher<std_msgs::Float64, SL_Bus_nc_pendulum_controller_std_ms
 // For Block nc_pendulum_controller/Publish1
 extern SimulinkPublisher<std_msgs::Float64, SL_Bus_nc_pendulum_controller_std_msgs_Float64> Pub_nc_pendulum_controller_18;
 
+// For Block nc_pendulum_controller/Publish2
+extern SimulinkPublisher<std_msgs::Float64, SL_Bus_nc_pendulum_controller_std_msgs_Float64> Pub_nc_pendulum_controller_69;
+
 void slros_node_init(int argc, char** argv);
 
 #endif
