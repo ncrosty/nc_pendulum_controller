@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.65
+// Model version                  : 1.66
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 08:08:32 2018
+// C/C++ source code generated on : Thu Apr 12 08:14:50 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -307,7 +307,7 @@ void nc_pendulum_controller_cModelClass::step()
     nc_pendulum_controller_B.qw;
 
   // Gain: '<Root>/Gain'
-  nc_pendulum_controller_B.Gain = 50.0 *
+  nc_pendulum_controller_B.Gain = -50.0 *
     nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // Gain: '<Root>/Gain1'
