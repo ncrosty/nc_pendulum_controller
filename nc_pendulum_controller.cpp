@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.144
+// Model version                  : 1.148
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:20:56 2018
+// C/C++ source code generated on : Thu Apr 12 17:40:27 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -57,24 +57,6 @@ real_T rt_atan2d_snf(real_T u0, real_T u1)
   return y;
 }
 
-void nc_pendulum_controller_cModelClass::SystemProp_matlabCodegenSet_oen
-  (robotics_slros_internal_blo_o_T *obj, boolean_T value)
-{
-  // Start for MATLABSystem: '<S11>/SourceBlock'
-  obj->matlabCodegenIsDeleted = value;
-}
-
-void nc_pendulum_controller_cModelClass::matlabCodegenHandle_matlabC_oen
-  (robotics_slros_internal_blo_o_T *obj)
-{
-  // Start for MATLABSystem: '<S11>/SourceBlock'
-  if (!obj->matlabCodegenIsDeleted) {
-    SystemProp_matlabCodegenSet_oen(obj, true);
-  }
-
-  // End of Start for MATLABSystem: '<S11>/SourceBlock'
-}
-
 void nc_pendulum_controller_cModelClass::SystemProp_matlabCodegenSetAnyP
   (robotics_slros_internal_block_T *obj, boolean_T value)
 {
@@ -99,6 +81,24 @@ void nc_pendulum_controller_cModelClass::matlabCodegenHandle_matlabCodeg
   // End of Start for MATLABSystem: '<S8>/SinkBlock'
 }
 
+void nc_pendulum_controller_cModelClass::SystemProp_matlabCodegenSet_oen
+  (robotics_slros_internal_blo_o_T *obj, boolean_T value)
+{
+  // Start for MATLABSystem: '<S11>/SourceBlock'
+  obj->matlabCodegenIsDeleted = value;
+}
+
+void nc_pendulum_controller_cModelClass::matlabCodegenHandle_matlabC_oen
+  (robotics_slros_internal_blo_o_T *obj)
+{
+  // Start for MATLABSystem: '<S11>/SourceBlock'
+  if (!obj->matlabCodegenIsDeleted) {
+    SystemProp_matlabCodegenSet_oen(obj, true);
+  }
+
+  // End of Start for MATLABSystem: '<S11>/SourceBlock'
+}
+
 // Model step function
 void nc_pendulum_controller_cModelClass::step()
 {
@@ -113,6 +113,92 @@ void nc_pendulum_controller_cModelClass::step()
   SL_Bus_nc_pendulum_controller_std_msgs_String *b_varargout_2_Name;
   SL_Bus_nc_pendulum_controller_geometry_msgs_Pose *b_varargout_2_Pose;
   SL_Bus_nc_pendulum_controller_geometry_msgs_Twist *b_varargout_2_Twist;
+
+  // Gain: '<S7>/Proportional Gain' incorporates:
+  //   Inport: '<Root>/In1'
+
+  nc_pendulum_controller_B.ProportionalGain = 1335.8349885008 *
+    nc_pendulum_controller_U.In1;
+
+  // DiscreteIntegrator: '<S7>/Integrator'
+  nc_pendulum_controller_B.Integrator =
+    nc_pendulum_controller_DW.Integrator_DSTATE;
+
+  // Gain: '<S7>/Derivative Gain' incorporates:
+  //   Inport: '<Root>/In1'
+
+  nc_pendulum_controller_B.DerivativeGain = 211.414401469562 *
+    nc_pendulum_controller_U.In1;
+
+  // DiscreteIntegrator: '<S7>/Filter'
+  nc_pendulum_controller_B.Filter = nc_pendulum_controller_DW.Filter_DSTATE;
+
+  // Sum: '<S7>/SumD'
+  nc_pendulum_controller_B.SumD = nc_pendulum_controller_B.DerivativeGain -
+    nc_pendulum_controller_B.Filter;
+
+  // Gain: '<S7>/Filter Coefficient'
+  nc_pendulum_controller_B.FilterCoefficient = 188.803670574829 *
+    nc_pendulum_controller_B.SumD;
+
+  // Outport: '<Root>/Out1' incorporates:
+  //   Sum: '<S7>/Sum'
+
+  nc_pendulum_controller_Y.Out1 = (nc_pendulum_controller_B.ProportionalGain +
+    nc_pendulum_controller_B.Integrator) +
+    nc_pendulum_controller_B.FilterCoefficient;
+
+  // Gain: '<Root>/Gain' incorporates:
+  //   Outport: '<Root>/Out1'
+
+  nc_pendulum_controller_B.Gain = -nc_pendulum_controller_Y.Out1;
+
+  // BusAssignment: '<Root>/Bus Assignment1' incorporates:
+  //   Constant: '<S1>/Constant'
+
+  nc_pendulum_controller_B.BusAssignment1 =
+    nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
+  nc_pendulum_controller_B.BusAssignment1.Data = nc_pendulum_controller_B.Gain;
+
+  // Outputs for Atomic SubSystem: '<Root>/Publish'
+  // MATLABSystem: '<S8>/SinkBlock'
+  nc_pendulum_controller_B.aSinInput =
+    nc_pendulum_controller_B.BusAssignment1.Data;
+
+  // Start for MATLABSystem: '<S8>/SinkBlock'
+  nc_pendulum_controller_B.busstruct.Data = nc_pendulum_controller_B.aSinInput;
+  Pub_nc_pendulum_controller_6.publish(&nc_pendulum_controller_B.busstruct);
+
+  // End of Outputs for SubSystem: '<Root>/Publish'
+
+  // Gain: '<Root>/Gain1' incorporates:
+  //   Outport: '<Root>/Out1'
+
+  nc_pendulum_controller_B.Gain1 = -nc_pendulum_controller_Y.Out1;
+
+  // BusAssignment: '<Root>/Bus Assignment2' incorporates:
+  //   Constant: '<S2>/Constant'
+
+  nc_pendulum_controller_B.BusAssignment2 =
+    nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
+  nc_pendulum_controller_B.BusAssignment2.Data = nc_pendulum_controller_B.Gain1;
+
+  // Outputs for Atomic SubSystem: '<Root>/Publish1'
+  // MATLABSystem: '<S9>/SinkBlock'
+  nc_pendulum_controller_B.aSinInput =
+    nc_pendulum_controller_B.BusAssignment2.Data;
+
+  // Start for MATLABSystem: '<S9>/SinkBlock'
+  nc_pendulum_controller_B.busstruct_p.Data = nc_pendulum_controller_B.aSinInput;
+  Pub_nc_pendulum_controller_18.publish(&nc_pendulum_controller_B.busstruct_p);
+
+  // End of Outputs for SubSystem: '<Root>/Publish1'
+
+  // Gain: '<S7>/Integral Gain' incorporates:
+  //   Inport: '<Root>/In1'
+
+  nc_pendulum_controller_B.IntegralGain = 2054.53861452298 *
+    nc_pendulum_controller_U.In1;
 
   // Outputs for Atomic SubSystem: '<Root>/Subscribe'
   // Start for MATLABSystem: '<S11>/SourceBlock'
@@ -329,74 +415,6 @@ void nc_pendulum_controller_cModelClass::step()
 
   // End of Saturate: '<Root>/Saturation'
 
-  // Gain: '<S7>/Proportional Gain'
-  nc_pendulum_controller_B.ProportionalGain = 391.076972292828 *
-    nc_pendulum_controller_B.Saturation;
-
-  // DiscreteIntegrator: '<S7>/Integrator'
-  nc_pendulum_controller_B.Integrator =
-    nc_pendulum_controller_DW.Integrator_DSTATE;
-
-  // Gain: '<S7>/Derivative Gain'
-  nc_pendulum_controller_B.DerivativeGain = 81.3758738793687 *
-    nc_pendulum_controller_B.Saturation;
-
-  // DiscreteIntegrator: '<S7>/Filter'
-  nc_pendulum_controller_B.Filter = nc_pendulum_controller_DW.Filter_DSTATE;
-
-  // Sum: '<S7>/SumD'
-  nc_pendulum_controller_B.SumD = nc_pendulum_controller_B.DerivativeGain -
-    nc_pendulum_controller_B.Filter;
-
-  // Gain: '<S7>/Filter Coefficient'
-  nc_pendulum_controller_B.FilterCoefficient = 9.96137012167381 *
-    nc_pendulum_controller_B.SumD;
-
-  // Outport: '<Root>/Out1' incorporates:
-  //   Sum: '<S7>/Sum'
-
-  nc_pendulum_controller_Y.Out1 = (nc_pendulum_controller_B.ProportionalGain +
-    nc_pendulum_controller_B.Integrator) +
-    nc_pendulum_controller_B.FilterCoefficient;
-
-  // BusAssignment: '<Root>/Bus Assignment1' incorporates:
-  //   Constant: '<S1>/Constant'
-  //   Outport: '<Root>/Out1'
-
-  nc_pendulum_controller_B.BusAssignment1 =
-    nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
-  nc_pendulum_controller_B.BusAssignment1.Data = nc_pendulum_controller_Y.Out1;
-
-  // Outputs for Atomic SubSystem: '<Root>/Publish'
-  // MATLABSystem: '<S8>/SinkBlock'
-  nc_pendulum_controller_B.aSinInput =
-    nc_pendulum_controller_B.BusAssignment1.Data;
-
-  // Start for MATLABSystem: '<S8>/SinkBlock'
-  nc_pendulum_controller_B.busstruct.Data = nc_pendulum_controller_B.aSinInput;
-  Pub_nc_pendulum_controller_6.publish(&nc_pendulum_controller_B.busstruct);
-
-  // End of Outputs for SubSystem: '<Root>/Publish'
-
-  // BusAssignment: '<Root>/Bus Assignment2' incorporates:
-  //   Constant: '<S2>/Constant'
-  //   Outport: '<Root>/Out1'
-
-  nc_pendulum_controller_B.BusAssignment2 =
-    nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
-  nc_pendulum_controller_B.BusAssignment2.Data = nc_pendulum_controller_Y.Out1;
-
-  // Outputs for Atomic SubSystem: '<Root>/Publish1'
-  // MATLABSystem: '<S9>/SinkBlock'
-  nc_pendulum_controller_B.aSinInput =
-    nc_pendulum_controller_B.BusAssignment2.Data;
-
-  // Start for MATLABSystem: '<S9>/SinkBlock'
-  nc_pendulum_controller_B.busstruct_p.Data = nc_pendulum_controller_B.aSinInput;
-  Pub_nc_pendulum_controller_18.publish(&nc_pendulum_controller_B.busstruct_p);
-
-  // End of Outputs for SubSystem: '<Root>/Publish1'
-
   // BusAssignment: '<Root>/Bus Assignment3' incorporates:
   //   Constant: '<S3>/Constant'
 
@@ -415,10 +433,6 @@ void nc_pendulum_controller_cModelClass::step()
   Pub_nc_pendulum_controller_69.publish(&nc_pendulum_controller_B.busstruct_c);
 
   // End of Outputs for SubSystem: '<Root>/Publish2'
-
-  // Gain: '<S7>/Integral Gain'
-  nc_pendulum_controller_B.IntegralGain = 299.50456300417 *
-    nc_pendulum_controller_B.Saturation;
 
   // Update for DiscreteIntegrator: '<S7>/Integrator'
   nc_pendulum_controller_DW.Integrator_DSTATE += 0.01 *
@@ -455,77 +469,45 @@ void nc_pendulum_controller_cModelClass::initialize()
   nc_pendulum_controller_Y.Out1 = 0.0;
 
   {
-    robotics_slros_internal_blo_o_T *b_obj;
+    robotics_slros_internal_block_T *b_obj;
+    robotics_slros_internal_blo_o_T *b_obj_0;
     char_T zeroDelimTopic[20];
-    robotics_slcore_internal_bloc_T *b_obj_0;
-    robotics_slros_internal_block_T *b_obj_1;
-    static const char_T tmp[19] = { '/', 'g', 'a', 'z', 'e', 'b', 'o', '/', 'l',
-      'i', 'n', 'k', '_', 's', 't', 'a', 't', 'e', 's' };
+    robotics_slcore_internal_bloc_T *b_obj_1;
+    static const char_T tmp[26] = { '/', 't', 'e', 'e', 't', 'e', 'r', 'b', 'o',
+      't', '/', 'l', 'e', 'f', 't', '_', 't', 'o', 'r', 'q', 'u', 'e', '_', 'c',
+      'm', 'd' };
 
-    static const char_T tmp_0[26] = { '/', 't', 'e', 'e', 't', 'e', 'r', 'b',
-      'o', 't', '/', 'l', 'e', 'f', 't', '_', 't', 'o', 'r', 'q', 'u', 'e', '_',
-      'c', 'm', 'd' };
-
-    static const char_T tmp_1[27] = { '/', 't', 'e', 'e', 't', 'e', 'r', 'b',
+    static const char_T tmp_0[27] = { '/', 't', 'e', 'e', 't', 'e', 'r', 'b',
       'o', 't', '/', 'r', 'i', 'g', 'h', 't', '_', 't', 'o', 'r', 'q', 'u', 'e',
       '_', 'c', 'm', 'd' };
+
+    static const char_T tmp_1[19] = { '/', 'g', 'a', 'z', 'e', 'b', 'o', '/',
+      'l', 'i', 'n', 'k', '_', 's', 't', 'a', 't', 'e', 's' };
 
     static const char_T tmp_2[19] = { '/', 'c', 'o', 'n', 't', 'r', 'o', 'l',
       '_', 'i', 'n', 'f', 'o', '/', 'p', 'i', 't', 'c', 'h' };
 
     int32_T i;
 
-    // Start for Atomic SubSystem: '<Root>/Subscribe'
-    // Start for MATLABSystem: '<S11>/SourceBlock'
-    nc_pendulum_controller_DW.obj_em.matlabCodegenIsDeleted = true;
-    b_obj = &nc_pendulum_controller_DW.obj_em;
-    b_obj->isInitialized = 0;
-    b_obj->matlabCodegenIsDeleted = false;
-    nc_pendulum_controller_DW.objisempty = true;
-    b_obj = &nc_pendulum_controller_DW.obj_em;
-    b_obj->isSetupComplete = false;
-    b_obj->isInitialized = 1;
-    for (i = 0; i < 19; i++) {
-      zeroDelimTopic[i] = tmp[i];
-    }
-
-    zeroDelimTopic[19] = '\x00';
-    Sub_nc_pendulum_controller_12.createSubscriber(zeroDelimTopic,
-      nc_pendulum_con_MessageQueueLen);
-    b_obj->isSetupComplete = true;
-
-    // End of Start for MATLABSystem: '<S11>/SourceBlock'
-    // End of Start for SubSystem: '<Root>/Subscribe'
-
-    // Start for Enabled SubSystem: '<Root>/Enabled Subsystem'
-    // Start for MATLABSystem: '<S5>/Coordinate Transformation Conversion'
-    b_obj_0 = &nc_pendulum_controller_DW.obj_n;
-    b_obj_0->isInitialized = 0;
-    nc_pendulum_controller_DW.objisempty_p = true;
-    b_obj_0 = &nc_pendulum_controller_DW.obj_n;
-    b_obj_0->isInitialized = 1;
-
-    // End of Start for SubSystem: '<Root>/Enabled Subsystem'
-
     // Start for Atomic SubSystem: '<Root>/Publish'
     // Start for MATLABSystem: '<S8>/SinkBlock'
     nc_pendulum_controller_DW.obj_e.matlabCodegenIsDeleted = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj_e;
-    b_obj_1->isInitialized = 0;
-    b_obj_1->matlabCodegenIsDeleted = false;
+    b_obj = &nc_pendulum_controller_DW.obj_e;
+    b_obj->isInitialized = 0;
+    b_obj->matlabCodegenIsDeleted = false;
     nc_pendulum_controller_DW.objisempty_as = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj_e;
-    b_obj_1->isSetupComplete = false;
-    b_obj_1->isInitialized = 1;
+    b_obj = &nc_pendulum_controller_DW.obj_e;
+    b_obj->isSetupComplete = false;
+    b_obj->isInitialized = 1;
     for (i = 0; i < 26; i++) {
-      nc_pendulum_controller_B.zeroDelimTopic_m[i] = tmp_0[i];
+      nc_pendulum_controller_B.zeroDelimTopic_m[i] = tmp[i];
     }
 
     nc_pendulum_controller_B.zeroDelimTopic_m[26] = '\x00';
     Pub_nc_pendulum_controller_6.createPublisher
       (nc_pendulum_controller_B.zeroDelimTopic_m,
        nc_pendulum_con_MessageQueueLen);
-    b_obj_1->isSetupComplete = true;
+    b_obj->isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S8>/SinkBlock'
     // End of Start for SubSystem: '<Root>/Publish'
@@ -533,35 +515,67 @@ void nc_pendulum_controller_cModelClass::initialize()
     // Start for Atomic SubSystem: '<Root>/Publish1'
     // Start for MATLABSystem: '<S9>/SinkBlock'
     nc_pendulum_controller_DW.obj_l.matlabCodegenIsDeleted = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj_l;
-    b_obj_1->isInitialized = 0;
-    b_obj_1->matlabCodegenIsDeleted = false;
+    b_obj = &nc_pendulum_controller_DW.obj_l;
+    b_obj->isInitialized = 0;
+    b_obj->matlabCodegenIsDeleted = false;
     nc_pendulum_controller_DW.objisempty_d = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj_l;
-    b_obj_1->isSetupComplete = false;
-    b_obj_1->isInitialized = 1;
+    b_obj = &nc_pendulum_controller_DW.obj_l;
+    b_obj->isSetupComplete = false;
+    b_obj->isInitialized = 1;
     for (i = 0; i < 27; i++) {
-      nc_pendulum_controller_B.zeroDelimTopic[i] = tmp_1[i];
+      nc_pendulum_controller_B.zeroDelimTopic[i] = tmp_0[i];
     }
 
     nc_pendulum_controller_B.zeroDelimTopic[27] = '\x00';
     Pub_nc_pendulum_controller_18.createPublisher
       (nc_pendulum_controller_B.zeroDelimTopic, nc_pendulum_con_MessageQueueLen);
-    b_obj_1->isSetupComplete = true;
+    b_obj->isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S9>/SinkBlock'
     // End of Start for SubSystem: '<Root>/Publish1'
 
+    // Start for Atomic SubSystem: '<Root>/Subscribe'
+    // Start for MATLABSystem: '<S11>/SourceBlock'
+    nc_pendulum_controller_DW.obj_em.matlabCodegenIsDeleted = true;
+    b_obj_0 = &nc_pendulum_controller_DW.obj_em;
+    b_obj_0->isInitialized = 0;
+    b_obj_0->matlabCodegenIsDeleted = false;
+    nc_pendulum_controller_DW.objisempty = true;
+    b_obj_0 = &nc_pendulum_controller_DW.obj_em;
+    b_obj_0->isSetupComplete = false;
+    b_obj_0->isInitialized = 1;
+    for (i = 0; i < 19; i++) {
+      zeroDelimTopic[i] = tmp_1[i];
+    }
+
+    zeroDelimTopic[19] = '\x00';
+    Sub_nc_pendulum_controller_12.createSubscriber(zeroDelimTopic,
+      nc_pendulum_con_MessageQueueLen);
+    b_obj_0->isSetupComplete = true;
+
+    // End of Start for MATLABSystem: '<S11>/SourceBlock'
+    // End of Start for SubSystem: '<Root>/Subscribe'
+
+    // Start for Enabled SubSystem: '<Root>/Enabled Subsystem'
+    // Start for MATLABSystem: '<S5>/Coordinate Transformation Conversion'
+    b_obj_1 = &nc_pendulum_controller_DW.obj_n;
+    b_obj_1->isInitialized = 0;
+    nc_pendulum_controller_DW.objisempty_p = true;
+    b_obj_1 = &nc_pendulum_controller_DW.obj_n;
+    b_obj_1->isInitialized = 1;
+
+    // End of Start for SubSystem: '<Root>/Enabled Subsystem'
+
     // Start for Atomic SubSystem: '<Root>/Publish2'
     // Start for MATLABSystem: '<S10>/SinkBlock'
     nc_pendulum_controller_DW.obj.matlabCodegenIsDeleted = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj;
-    b_obj_1->isInitialized = 0;
-    b_obj_1->matlabCodegenIsDeleted = false;
+    b_obj = &nc_pendulum_controller_DW.obj;
+    b_obj->isInitialized = 0;
+    b_obj->matlabCodegenIsDeleted = false;
     nc_pendulum_controller_DW.objisempty_a = true;
-    b_obj_1 = &nc_pendulum_controller_DW.obj;
-    b_obj_1->isSetupComplete = false;
-    b_obj_1->isInitialized = 1;
+    b_obj = &nc_pendulum_controller_DW.obj;
+    b_obj->isSetupComplete = false;
+    b_obj->isInitialized = 1;
     for (i = 0; i < 19; i++) {
       zeroDelimTopic[i] = tmp_2[i];
     }
@@ -569,7 +583,7 @@ void nc_pendulum_controller_cModelClass::initialize()
     zeroDelimTopic[19] = '\x00';
     Pub_nc_pendulum_controller_69.createPublisher(zeroDelimTopic,
       nc_pendulum_con_MessageQueueLen);
-    b_obj_1->isSetupComplete = true;
+    b_obj->isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S10>/SinkBlock'
     // End of Start for SubSystem: '<Root>/Publish2'
@@ -579,12 +593,6 @@ void nc_pendulum_controller_cModelClass::initialize()
 // Model terminate function
 void nc_pendulum_controller_cModelClass::terminate()
 {
-  // Terminate for Atomic SubSystem: '<Root>/Subscribe'
-  // Terminate for MATLABSystem: '<S11>/SourceBlock'
-  matlabCodegenHandle_matlabC_oen(&nc_pendulum_controller_DW.obj_em);
-
-  // End of Terminate for SubSystem: '<Root>/Subscribe'
-
   // Terminate for Atomic SubSystem: '<Root>/Publish'
   // Terminate for MATLABSystem: '<S8>/SinkBlock'
   matlabCodegenHandle_matlabCodeg(&nc_pendulum_controller_DW.obj_e);
@@ -596,6 +604,12 @@ void nc_pendulum_controller_cModelClass::terminate()
   matlabCodegenHandle_matlabCodeg(&nc_pendulum_controller_DW.obj_l);
 
   // End of Terminate for SubSystem: '<Root>/Publish1'
+
+  // Terminate for Atomic SubSystem: '<Root>/Subscribe'
+  // Terminate for MATLABSystem: '<S11>/SourceBlock'
+  matlabCodegenHandle_matlabC_oen(&nc_pendulum_controller_DW.obj_em);
+
+  // End of Terminate for SubSystem: '<Root>/Subscribe'
 
   // Terminate for Atomic SubSystem: '<Root>/Publish2'
   // Terminate for MATLABSystem: '<S10>/SinkBlock'
