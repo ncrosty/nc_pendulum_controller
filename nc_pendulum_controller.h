@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.142
+// Model version                  : 1.143
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:08:03 2018
+// C/C++ source code generated on : Thu Apr 12 17:10:59 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -42,10 +42,12 @@ typedef struct {
   SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates In1;// '<S12>/In1'
   SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates SourceBlock_o2;// '<S11>/SourceBlock' 
   SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates b_varargout_2;
+  real_T VectorConcatenate[4];         // '<Root>/Vector Concatenate'
   real_T in[4];
   real_T b_z1[4];
   char_T zeroDelimTopic[28];
   char_T zeroDelimTopic_m[27];
+  real_T Saturation;                   // '<Root>/Saturation'
   real_T ProportionalGain;             // '<S7>/Proportional Gain'
   real_T Integrator;                   // '<S7>/Integrator'
   real_T DerivativeGain;               // '<S7>/Derivative Gain'
@@ -54,8 +56,6 @@ typedef struct {
   real_T FilterCoefficient;            // '<S7>/Filter Coefficient'
   real_T Sum;                          // '<S7>/Sum'
   real_T IntegralGain;                 // '<S7>/Integral Gain'
-  real_T VectorConcatenate[4];         // '<Root>/Vector Concatenate'
-  real_T Saturation;                   // '<Root>/Saturation'
   real_T CoordinateTransformationConvers[3];// '<S5>/Coordinate Transformation Conversion' 
   real_T qw;
   real_T qx;
@@ -155,12 +155,12 @@ class nc_pendulum_controller_cModelClass {
   RT_MODEL_nc_pendulum_controll_T nc_pendulum_controller_M;
 
   // private member function(s) for subsystem '<Root>'
-  void SystemProp_matlabCodegenSetAnyP(robotics_slros_internal_block_T *obj,
-    boolean_T value);
-  void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj);
   void SystemProp_matlabCodegenSet_oen(robotics_slros_internal_blo_o_T *obj,
     boolean_T value);
   void matlabCodegenHandle_matlabC_oen(robotics_slros_internal_blo_o_T *obj);
+  void SystemProp_matlabCodegenSetAnyP(robotics_slros_internal_block_T *obj,
+    boolean_T value);
+  void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj);
 };
 
 //-
