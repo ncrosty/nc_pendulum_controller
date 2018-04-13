@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.188
+// Model version                  : 1.201
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 20:38:44 2018
+// C/C++ source code generated on : Thu Apr 12 21:58:17 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -39,24 +39,27 @@
 
 // Block signals (default storage)
 typedef struct {
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates In1;// '<S12>/In1'
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates SourceBlock_o2;// '<S11>/SourceBlock' 
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates In1;// '<S10>/In1'
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates SourceBlock_o2;// '<S9>/SourceBlock' 
   SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates b_varargout_2;
   real_T VectorConcatenate[4];         // '<Root>/Vector Concatenate'
   real_T in[4];
   real_T b_z1[4];
   char_T zeroDelimTopic[28];
   char_T zeroDelimTopic_m[27];
-  real_T ProportionalGain;             // '<S7>/Proportional Gain'
-  real_T Integrator;                   // '<S7>/Integrator'
-  real_T DerivativeGain;               // '<S7>/Derivative Gain'
-  real_T Filter;                       // '<S7>/Filter'
-  real_T SumD;                         // '<S7>/SumD'
-  real_T FilterCoefficient;            // '<S7>/Filter Coefficient'
+  real_T Cos;                          // '<Root>/Cos'
+  real_T ProportionalGain;             // '<S6>/Proportional Gain'
+  real_T Integrator;                   // '<S6>/Integrator'
+  real_T DerivativeGain;               // '<S6>/Derivative Gain'
+  real_T Filter;                       // '<S6>/Filter'
+  real_T SumD;                         // '<S6>/SumD'
+  real_T FilterCoefficient;            // '<S6>/Filter Coefficient'
+  real_T Sum;                          // '<S6>/Sum'
+  real_T Multiply;                     // '<Root>/Multiply'
   real_T Gain;                         // '<Root>/Gain'
   real_T Gain1;                        // '<Root>/Gain1'
-  real_T IntegralGain;                 // '<S7>/Integral Gain'
-  real_T CoordinateTransformationConvers[3];// '<S5>/Coordinate Transformation Conversion' 
+  real_T IntegralGain;                 // '<S6>/Integral Gain'
+  real_T CoordinateTransformationConvers[3];// '<S4>/Coordinate Transformation Conversion' 
   real_T qw;
   real_T qx;
   real_T qy;
@@ -72,28 +75,24 @@ typedef struct {
   real_T out_idx_0;
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment1;// '<Root>/Bus Assignment1' 
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment2;// '<Root>/Bus Assignment2' 
-  SL_Bus_nc_pendulum_controller_std_msgs_Float64 BusAssignment3;// '<Root>/Bus Assignment3' 
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct;
   SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct_p;
-  SL_Bus_nc_pendulum_controller_std_msgs_Float64 busstruct_c;
-  boolean_T Compare;                   // '<S4>/Compare'
-  boolean_T SourceBlock_o1;            // '<S11>/SourceBlock'
+  boolean_T Compare;                   // '<S3>/Compare'
+  boolean_T SourceBlock_o1;            // '<S9>/SourceBlock'
 } B_nc_pendulum_controller_T;
 
 // Block states (default storage) for system '<Root>'
 typedef struct {
-  robotics_slros_internal_block_T obj; // '<S10>/SinkBlock'
-  robotics_slros_internal_block_T obj_l;// '<S9>/SinkBlock'
-  robotics_slros_internal_block_T obj_e;// '<S8>/SinkBlock'
-  robotics_slros_internal_blo_o_T obj_em;// '<S11>/SourceBlock'
-  real_T Integrator_DSTATE;            // '<S7>/Integrator'
-  real_T Filter_DSTATE;                // '<S7>/Filter'
-  robotics_slcore_internal_bloc_T obj_h;// '<S5>/Coordinate Transformation Conversion' 
-  boolean_T objisempty;                // '<S11>/SourceBlock'
-  boolean_T objisempty_a;              // '<S10>/SinkBlock'
-  boolean_T objisempty_d;              // '<S9>/SinkBlock'
-  boolean_T objisempty_as;             // '<S8>/SinkBlock'
-  boolean_T objisempty_f;              // '<S5>/Coordinate Transformation Conversion' 
+  robotics_slros_internal_block_T obj; // '<S8>/SinkBlock'
+  robotics_slros_internal_block_T obj_e;// '<S7>/SinkBlock'
+  robotics_slros_internal_blo_o_T obj_em;// '<S9>/SourceBlock'
+  real_T Integrator_DSTATE;            // '<S6>/Integrator'
+  real_T Filter_DSTATE;                // '<S6>/Filter'
+  robotics_slcore_internal_bloc_T obj_h;// '<S4>/Coordinate Transformation Conversion' 
+  boolean_T objisempty;                // '<S9>/SourceBlock'
+  boolean_T objisempty_d;              // '<S8>/SinkBlock'
+  boolean_T objisempty_a;              // '<S7>/SinkBlock'
+  boolean_T objisempty_f;              // '<S4>/Coordinate Transformation Conversion' 
 } DW_nc_pendulum_controller_T;
 
 // External outputs (root outports fed by signals with default storage)
@@ -147,9 +146,9 @@ class nc_pendulum_controller_cModelClass {
   RT_MODEL_nc_pendulum_controll_T nc_pendulum_controller_M;
 
   // private member function(s) for subsystem '<Root>'
-  void SystemProp_matlabCodegenSet_oen(robotics_slros_internal_blo_o_T *obj,
+  void SystemProp_matlabCodegenSetA_oe(robotics_slros_internal_blo_o_T *obj,
     boolean_T value);
-  void matlabCodegenHandle_matlabC_oen(robotics_slros_internal_blo_o_T *obj);
+  void matlabCodegenHandle_matlabCo_oe(robotics_slros_internal_blo_o_T *obj);
   void SystemProp_matlabCodegenSetAnyP(robotics_slros_internal_block_T *obj,
     boolean_T value);
   void matlabCodegenHandle_matlabCodeg(robotics_slros_internal_block_T *obj);
@@ -178,16 +177,14 @@ class nc_pendulum_controller_cModelClass {
 //  '<Root>' : 'nc_pendulum_controller'
 //  '<S1>'   : 'nc_pendulum_controller/Blank Message1'
 //  '<S2>'   : 'nc_pendulum_controller/Blank Message2'
-//  '<S3>'   : 'nc_pendulum_controller/Blank Message3'
-//  '<S4>'   : 'nc_pendulum_controller/Compare To Zero'
-//  '<S5>'   : 'nc_pendulum_controller/Enabled Subsystem'
-//  '<S6>'   : 'nc_pendulum_controller/MATLAB Function'
-//  '<S7>'   : 'nc_pendulum_controller/PID Controller'
-//  '<S8>'   : 'nc_pendulum_controller/Publish'
-//  '<S9>'   : 'nc_pendulum_controller/Publish1'
-//  '<S10>'  : 'nc_pendulum_controller/Publish2'
-//  '<S11>'  : 'nc_pendulum_controller/Subscribe'
-//  '<S12>'  : 'nc_pendulum_controller/Subscribe/Enabled Subsystem'
+//  '<S3>'   : 'nc_pendulum_controller/Compare To Zero'
+//  '<S4>'   : 'nc_pendulum_controller/Enabled Subsystem'
+//  '<S5>'   : 'nc_pendulum_controller/MATLAB Function'
+//  '<S6>'   : 'nc_pendulum_controller/PID Controller'
+//  '<S7>'   : 'nc_pendulum_controller/Publish'
+//  '<S8>'   : 'nc_pendulum_controller/Publish1'
+//  '<S9>'   : 'nc_pendulum_controller/Subscribe'
+//  '<S10>'  : 'nc_pendulum_controller/Subscribe/Enabled Subsystem'
 
 #endif                                 // RTW_HEADER_nc_pendulum_controller_h_
 
