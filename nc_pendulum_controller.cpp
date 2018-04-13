@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.201
+// Model version                  : 1.204
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 21:58:17 2018
+// C/C++ source code generated on : Thu Apr 12 23:09:05 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -319,15 +319,11 @@ void nc_pendulum_controller_cModelClass::step()
     (nc_pendulum_controller_B.CoordinateTransformationConvers[1]);
 
   // Gain: '<S6>/Proportional Gain'
-  nc_pendulum_controller_B.ProportionalGain = 151.378632207279 *
+  nc_pendulum_controller_B.ProportionalGain = 690.282636783837 *
     nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
-  // DiscreteIntegrator: '<S6>/Integrator'
-  nc_pendulum_controller_B.Integrator =
-    nc_pendulum_controller_DW.Integrator_DSTATE;
-
   // Gain: '<S6>/Derivative Gain'
-  nc_pendulum_controller_B.DerivativeGain = 47.4716312411163 *
+  nc_pendulum_controller_B.DerivativeGain = 130.113707941987 *
     nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // DiscreteIntegrator: '<S6>/Filter'
@@ -338,12 +334,11 @@ void nc_pendulum_controller_cModelClass::step()
     nc_pendulum_controller_B.Filter;
 
   // Gain: '<S6>/Filter Coefficient'
-  nc_pendulum_controller_B.FilterCoefficient = 142.924455972757 *
+  nc_pendulum_controller_B.FilterCoefficient = 182.319016505685 *
     nc_pendulum_controller_B.SumD;
 
   // Sum: '<S6>/Sum'
-  nc_pendulum_controller_B.Sum = (nc_pendulum_controller_B.ProportionalGain +
-    nc_pendulum_controller_B.Integrator) +
+  nc_pendulum_controller_B.Sum = nc_pendulum_controller_B.ProportionalGain +
     nc_pendulum_controller_B.FilterCoefficient;
 
   // Product: '<Root>/Multiply'
@@ -391,14 +386,6 @@ void nc_pendulum_controller_cModelClass::step()
   Pub_nc_pendulum_controller_18.publish(&nc_pendulum_controller_B.busstruct_p);
 
   // End of Outputs for SubSystem: '<Root>/Publish1'
-
-  // Gain: '<S6>/Integral Gain'
-  nc_pendulum_controller_B.IntegralGain = 12.7469644904371 *
-    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
-
-  // Update for DiscreteIntegrator: '<S6>/Integrator'
-  nc_pendulum_controller_DW.Integrator_DSTATE += 0.01 *
-    nc_pendulum_controller_B.IntegralGain;
 
   // Update for DiscreteIntegrator: '<S6>/Filter'
   nc_pendulum_controller_DW.Filter_DSTATE += 0.01 *

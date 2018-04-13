@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.201
+// Model version                  : 1.204
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 21:58:17 2018
+// C/C++ source code generated on : Thu Apr 12 23:09:05 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -49,7 +49,6 @@ typedef struct {
   char_T zeroDelimTopic_m[27];
   real_T Cos;                          // '<Root>/Cos'
   real_T ProportionalGain;             // '<S6>/Proportional Gain'
-  real_T Integrator;                   // '<S6>/Integrator'
   real_T DerivativeGain;               // '<S6>/Derivative Gain'
   real_T Filter;                       // '<S6>/Filter'
   real_T SumD;                         // '<S6>/SumD'
@@ -58,7 +57,6 @@ typedef struct {
   real_T Multiply;                     // '<Root>/Multiply'
   real_T Gain;                         // '<Root>/Gain'
   real_T Gain1;                        // '<Root>/Gain1'
-  real_T IntegralGain;                 // '<S6>/Integral Gain'
   real_T CoordinateTransformationConvers[3];// '<S4>/Coordinate Transformation Conversion' 
   real_T qw;
   real_T qx;
@@ -86,7 +84,6 @@ typedef struct {
   robotics_slros_internal_block_T obj; // '<S8>/SinkBlock'
   robotics_slros_internal_block_T obj_e;// '<S7>/SinkBlock'
   robotics_slros_internal_blo_o_T obj_em;// '<S9>/SourceBlock'
-  real_T Integrator_DSTATE;            // '<S6>/Integrator'
   real_T Filter_DSTATE;                // '<S6>/Filter'
   robotics_slcore_internal_bloc_T obj_h;// '<S4>/Coordinate Transformation Conversion' 
   boolean_T objisempty;                // '<S9>/SourceBlock'
