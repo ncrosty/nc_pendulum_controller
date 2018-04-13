@@ -8,7 +8,7 @@ extern ros::NodeHandle * SLROSNodePtr;
 extern const std::string SLROSNodeName;
 
 // For Block nc_pendulum_controller/Subscribe
-extern SimulinkSubscriber<gazebo_msgs::ModelStates, SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates> Sub_nc_pendulum_controller_12;
+extern SimulinkSubscriber<gazebo_msgs::LinkStates, SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates> Sub_nc_pendulum_controller_12;
 
 // For Block nc_pendulum_controller/Publish
 extern SimulinkPublisher<std_msgs::Float64, SL_Bus_nc_pendulum_controller_std_msgs_Float64> Pub_nc_pendulum_controller_6;

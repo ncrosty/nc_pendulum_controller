@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.149
+// Model version                  : 1.188
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:45:40 2018
+// C/C++ source code generated on : Thu Apr 12 20:38:44 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -39,15 +39,14 @@
 
 // Block signals (default storage)
 typedef struct {
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates In1;// '<S12>/In1'
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates SourceBlock_o2;// '<S11>/SourceBlock' 
-  SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates b_varargout_2;
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates In1;// '<S12>/In1'
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates SourceBlock_o2;// '<S11>/SourceBlock' 
+  SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates b_varargout_2;
   real_T VectorConcatenate[4];         // '<Root>/Vector Concatenate'
   real_T in[4];
   real_T b_z1[4];
   char_T zeroDelimTopic[28];
   char_T zeroDelimTopic_m[27];
-  real_T Saturation;                   // '<Root>/Saturation'
   real_T ProportionalGain;             // '<S7>/Proportional Gain'
   real_T Integrator;                   // '<S7>/Integrator'
   real_T DerivativeGain;               // '<S7>/Derivative Gain'
@@ -89,18 +88,13 @@ typedef struct {
   robotics_slros_internal_blo_o_T obj_em;// '<S11>/SourceBlock'
   real_T Integrator_DSTATE;            // '<S7>/Integrator'
   real_T Filter_DSTATE;                // '<S7>/Filter'
-  robotics_slcore_internal_bloc_T obj_n;// '<S5>/Coordinate Transformation Conversion' 
+  robotics_slcore_internal_bloc_T obj_h;// '<S5>/Coordinate Transformation Conversion' 
   boolean_T objisempty;                // '<S11>/SourceBlock'
   boolean_T objisempty_a;              // '<S10>/SinkBlock'
   boolean_T objisempty_d;              // '<S9>/SinkBlock'
   boolean_T objisempty_as;             // '<S8>/SinkBlock'
-  boolean_T objisempty_p;              // '<S5>/Coordinate Transformation Conversion' 
+  boolean_T objisempty_f;              // '<S5>/Coordinate Transformation Conversion' 
 } DW_nc_pendulum_controller_T;
-
-// External inputs (root inport signals with default storage)
-typedef struct {
-  real_T In1;                          // '<Root>/In1'
-} ExtU_nc_pendulum_controller_T;
 
 // External outputs (root outports fed by signals with default storage)
 typedef struct {
@@ -120,9 +114,6 @@ extern const SL_Bus_nc_pendulum_controller_std_msgs_Float64
 class nc_pendulum_controller_cModelClass {
   // public data and function members
  public:
-  // External inputs
-  ExtU_nc_pendulum_controller_T nc_pendulum_controller_U;
-
   // External outputs
   ExtY_nc_pendulum_controller_T nc_pendulum_controller_Y;
 
@@ -168,8 +159,6 @@ class nc_pendulum_controller_cModelClass {
 //  These blocks were eliminated from the model due to optimizations:
 //
 //  Block '<Root>/Scope2' : Unused code path elimination
-//  Block '<Root>/Switch' : Eliminated due to constant selection input
-//  Block '<Root>/Constant1' : Unused code path elimination
 
 
 //-

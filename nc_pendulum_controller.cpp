@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.149
+// Model version                  : 1.188
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:45:40 2018
+// C/C++ source code generated on : Thu Apr 12 20:38:44 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -171,13 +171,13 @@ void nc_pendulum_controller_cModelClass::step()
   // End of Outputs for SubSystem: '<Root>/Subscribe'
 
   // MATLAB Function: '<Root>/MATLAB Function'
-  nc_pendulum_controller_B.VectorConcatenate[3] =
-    nc_pendulum_controller_B.In1.Pose[1].Orientation.W;
   nc_pendulum_controller_B.VectorConcatenate[0] =
-    nc_pendulum_controller_B.In1.Pose[1].Orientation.X;
+    nc_pendulum_controller_B.In1.Pose[1].Orientation.W;
   nc_pendulum_controller_B.VectorConcatenate[1] =
-    nc_pendulum_controller_B.In1.Pose[1].Orientation.Y;
+    nc_pendulum_controller_B.In1.Pose[1].Orientation.X;
   nc_pendulum_controller_B.VectorConcatenate[2] =
+    nc_pendulum_controller_B.In1.Pose[1].Orientation.Y;
+  nc_pendulum_controller_B.VectorConcatenate[3] =
     nc_pendulum_controller_B.In1.Pose[1].Orientation.Z;
 
   // RelationalOperator: '<S4>/Compare'
@@ -316,22 +316,9 @@ void nc_pendulum_controller_cModelClass::step()
 
   // End of Outputs for SubSystem: '<Root>/Enabled Subsystem'
 
-  // Saturate: '<Root>/Saturation'
-  nc_pendulum_controller_B.aSinInput =
-    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
-  if (nc_pendulum_controller_B.aSinInput > 2.0) {
-    nc_pendulum_controller_B.Saturation = 2.0;
-  } else if (nc_pendulum_controller_B.aSinInput < -2.0) {
-    nc_pendulum_controller_B.Saturation = -2.0;
-  } else {
-    nc_pendulum_controller_B.Saturation = nc_pendulum_controller_B.aSinInput;
-  }
-
-  // End of Saturate: '<Root>/Saturation'
-
   // Gain: '<S7>/Proportional Gain'
   nc_pendulum_controller_B.ProportionalGain = 1335.8349885008 *
-    nc_pendulum_controller_B.Saturation;
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // DiscreteIntegrator: '<S7>/Integrator'
   nc_pendulum_controller_B.Integrator =
@@ -339,7 +326,7 @@ void nc_pendulum_controller_cModelClass::step()
 
   // Gain: '<S7>/Derivative Gain'
   nc_pendulum_controller_B.DerivativeGain = 211.414401469562 *
-    nc_pendulum_controller_B.Saturation;
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // DiscreteIntegrator: '<S7>/Filter'
   nc_pendulum_controller_B.Filter = nc_pendulum_controller_DW.Filter_DSTATE;
@@ -362,7 +349,7 @@ void nc_pendulum_controller_cModelClass::step()
   // Gain: '<Root>/Gain' incorporates:
   //   Outport: '<Root>/Out1'
 
-  nc_pendulum_controller_B.Gain = -nc_pendulum_controller_Y.Out1;
+  nc_pendulum_controller_B.Gain = -0.5 * nc_pendulum_controller_Y.Out1;
 
   // BusAssignment: '<Root>/Bus Assignment1' incorporates:
   //   Constant: '<S1>/Constant'
@@ -385,7 +372,7 @@ void nc_pendulum_controller_cModelClass::step()
   // Gain: '<Root>/Gain1' incorporates:
   //   Outport: '<Root>/Out1'
 
-  nc_pendulum_controller_B.Gain1 = -nc_pendulum_controller_Y.Out1;
+  nc_pendulum_controller_B.Gain1 = -0.5 * nc_pendulum_controller_Y.Out1;
 
   // BusAssignment: '<Root>/Bus Assignment2' incorporates:
   //   Constant: '<S2>/Constant'
@@ -411,7 +398,7 @@ void nc_pendulum_controller_cModelClass::step()
   nc_pendulum_controller_B.BusAssignment3 =
     nc_pendulum_controller_rtZSL_Bus_nc_pendulum_controller_std_msgs_Float64;
   nc_pendulum_controller_B.BusAssignment3.Data =
-    nc_pendulum_controller_B.Saturation;
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // Outputs for Atomic SubSystem: '<Root>/Publish2'
   // MATLABSystem: '<S10>/SinkBlock'
@@ -426,7 +413,7 @@ void nc_pendulum_controller_cModelClass::step()
 
   // Gain: '<S7>/Integral Gain'
   nc_pendulum_controller_B.IntegralGain = 2054.53861452298 *
-    nc_pendulum_controller_B.Saturation;
+    nc_pendulum_controller_B.CoordinateTransformationConvers[1];
 
   // Update for DiscreteIntegrator: '<S7>/Integrator'
   nc_pendulum_controller_DW.Integrator_DSTATE += 0.01 *
@@ -455,9 +442,6 @@ void nc_pendulum_controller_cModelClass::initialize()
   // states (dwork)
   (void) memset((void *)&nc_pendulum_controller_DW, 0,
                 sizeof(DW_nc_pendulum_controller_T));
-
-  // external inputs
-  nc_pendulum_controller_U.In1 = 0.0;
 
   // external outputs
   nc_pendulum_controller_Y.Out1 = 0.0;
@@ -507,10 +491,10 @@ void nc_pendulum_controller_cModelClass::initialize()
 
     // Start for Enabled SubSystem: '<Root>/Enabled Subsystem'
     // Start for MATLABSystem: '<S5>/Coordinate Transformation Conversion'
-    b_obj_0 = &nc_pendulum_controller_DW.obj_n;
+    b_obj_0 = &nc_pendulum_controller_DW.obj_h;
     b_obj_0->isInitialized = 0;
-    nc_pendulum_controller_DW.objisempty_p = true;
-    b_obj_0 = &nc_pendulum_controller_DW.obj_n;
+    nc_pendulum_controller_DW.objisempty_f = true;
+    b_obj_0 = &nc_pendulum_controller_DW.obj_h;
     b_obj_0->isInitialized = 1;
 
     // End of Start for SubSystem: '<Root>/Enabled Subsystem'

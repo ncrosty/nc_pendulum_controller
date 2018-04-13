@@ -1,20 +1,20 @@
 #include "slros_busmsg_conversion.h"
 
 
-// Conversions between SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates and gazebo_msgs::ModelStates
+// Conversions between SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates and gazebo_msgs::LinkStates
 
-void convertFromBus(gazebo_msgs::ModelStates* msgPtr, SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates const* busPtr)
+void convertFromBus(gazebo_msgs::LinkStates* msgPtr, SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates const* busPtr)
 {
-  const std::string rosMessageType("gazebo_msgs/ModelStates");
+  const std::string rosMessageType("gazebo_msgs/LinkStates");
 
   convertFromBusVariableStringArray(msgPtr->name, busPtr->Name, busPtr->Name_SL_Info);
   convertFromBusVariableNestedArray(msgPtr->pose, busPtr->Pose, busPtr->Pose_SL_Info);
   convertFromBusVariableNestedArray(msgPtr->twist, busPtr->Twist, busPtr->Twist_SL_Info);
 }
 
-void convertToBus(SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates* busPtr, gazebo_msgs::ModelStates const* msgPtr)
+void convertToBus(SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates* busPtr, gazebo_msgs::LinkStates const* msgPtr)
 {
-  const std::string rosMessageType("gazebo_msgs/ModelStates");
+  const std::string rosMessageType("gazebo_msgs/LinkStates");
 
   convertToBusVariableStringArray(busPtr->Name, busPtr->Name_SL_Info, msgPtr->name, slros::EnabledWarning(rosMessageType, "name"));
   convertToBusVariableNestedArray(busPtr->Pose, busPtr->Pose_SL_Info, msgPtr->pose, slros::EnabledWarning(rosMessageType, "pose"));

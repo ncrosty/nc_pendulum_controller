@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.149
+// Model version                  : 1.188
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 17:45:40 2018
+// C/C++ source code generated on : Thu Apr 12 20:38:44 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -114,10 +114,10 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates_
-#define DEFINED_TYPEDEF_FOR_SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates_
+#ifndef DEFINED_TYPEDEF_FOR_SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates_
+#define DEFINED_TYPEDEF_FOR_SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates_
 
-// MsgType=gazebo_msgs/ModelStates
+// MsgType=gazebo_msgs/LinkStates
 typedef struct {
   // MsgType=std_msgs/String:PrimitiveROSType=string[]:IsVarLen=1:VarLenCategory=data:VarLenElem=Name_SL_Info:TruncateAction=warn 
   SL_Bus_nc_pendulum_controller_std_msgs_String Name[16];
@@ -136,7 +136,7 @@ typedef struct {
 
   // IsVarLen=1:VarLenCategory=length:VarLenElem=Twist
   SL_Bus_ROSVariableLengthArrayInfo Twist_SL_Info;
-} SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates;
+} SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates;
 
 #endif
 

@@ -2,7 +2,7 @@
 #define _SLROS_BUSMSG_CONVERSION_H_
 
 #include <ros/ros.h>
-#include <gazebo_msgs/ModelStates.h>
+#include <gazebo_msgs/LinkStates.h>
 #include <geometry_msgs/Point.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Quaternion.h>
@@ -13,8 +13,8 @@
 #include "slros_msgconvert_utils.h"
 
 
-void convertFromBus(gazebo_msgs::ModelStates* msgPtr, SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates const* busPtr);
-void convertToBus(SL_Bus_nc_pendulum_controller_gazebo_msgs_ModelStates* busPtr, gazebo_msgs::ModelStates const* msgPtr);
+void convertFromBus(gazebo_msgs::LinkStates* msgPtr, SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates const* busPtr);
+void convertToBus(SL_Bus_nc_pendulum_controller_gazebo_msgs_LinkStates* busPtr, gazebo_msgs::LinkStates const* msgPtr);
 
 void convertFromBus(geometry_msgs::Point* msgPtr, SL_Bus_nc_pendulum_controller_geometry_msgs_Point const* busPtr);
 void convertToBus(SL_Bus_nc_pendulum_controller_geometry_msgs_Point* busPtr, geometry_msgs::Point const* msgPtr);
