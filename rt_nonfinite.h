@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'nc_pendulum_controller'.
 //
-// Model version                  : 1.204
+// Model version                  : 1.223
 // Simulink Coder version         : 8.14 (R2018a) 06-Feb-2018
-// C/C++ source code generated on : Thu Apr 12 23:09:05 2018
+// C/C++ source code generated on : Wed Apr 18 13:56:33 2018
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Linux 64)
